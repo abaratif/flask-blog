@@ -1,16 +1,25 @@
+from flask import render_template
 from app import app
 
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}  # fake user
-    return '''
-<html>
-  <head>
-    <title>flask-blog! Home Page</title>
-  </head>
-  <body>
-    <h1>Hello, ''' + user['nickname'] + '''</h1>
-  </body>
-</html>
-'''
+	user = {'nickname': 'Brian'}  # fake user
+	posts = [  # fake array of posts
+		{ 
+			'author': {'nickname': 'John'}, 
+			'body': 'Beautiful day in Portland!',
+			'feeling' : 'Happy!',
+			'date': 'Monday' 
+		},
+		{ 
+			'author': {'nickname': 'Susan'}, 
+			'body': 'The Avengers movie was so cool!',
+			# 'feeling' : "Super.",
+			'date': 'Monday'  
+		}
+	]
+	return render_template("index.html",
+						   title='Home',
+						   user=user,
+						   posts=posts)
